@@ -1,0 +1,26 @@
+
+
+<div (focusout)="onFocusLost($event)">
+  <div>
+      <form title="birds">
+        <input [(ngModel)]="searchString" name="search" type="text" (keyup)="filterBirds(filter.value)" autocomplete="off" #filter>
+        <button type="button" (click)="submitGuess()">Guess</button>
+      </form>
+  </div>
+  <div id="divFilteredList">
+    <table id="tblFilteredList">
+      <tbody id="bodyFilteredList">
+        @for (bird of filteredList; track bird; let i = $index)
+        {
+          <tr id={{bird.name}}>
+            <td (click)="selectBird(bird.id)">{{bird.name}}</td> 
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<span>{{selectedBird?.name}}</span>
+<!-- <span>{{filter.value}}</span> -->

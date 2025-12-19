@@ -11,6 +11,8 @@ export interface Bird {
     habitats: Habitat[];
     foodCost: number;
     foodsInCost: Food[];
+    scientificName: string;
+    powerDescription: string;
   }
 
 export enum Expansion {

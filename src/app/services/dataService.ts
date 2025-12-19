@@ -31,6 +31,8 @@ export class DataService
                 habitats: this.GetHabitats(jsonBird),
                 foodCost: this.GetFoodCost(jsonBird),
                 foodsInCost: this.GetFoodsInCost(jsonBird),
+                scientificName: jsonBird['Scientific name'],
+                powerDescription: jsonBird['Power text'],
 
             })
             

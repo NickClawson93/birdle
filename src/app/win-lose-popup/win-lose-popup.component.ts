@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './win-lose-popup.component.html',
-  styleUrl: './win-lose-popup.component.scss',
+  styleUrl: './win-lose-popup.component.css',
   inputs: ['isVisible', 'message'],
   outputs: ['reset']
 })

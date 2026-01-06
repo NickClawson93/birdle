@@ -6,7 +6,7 @@ import { SecretService } from '../services/secretService';
   selector: 'app-hints',
   imports: [CdkDrag],
   templateUrl: './hints.html',
-  styleUrl: './hints.scss',
+  styleUrl: './hints.css',
 })
 export class Hints {
   secretService = inject(SecretService);

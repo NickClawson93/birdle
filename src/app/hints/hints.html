@@ -10,6 +10,7 @@
     }
 </div> -->
 <img #hungryBird [src]="isHovering ? '/assets/HintBirdHungry.PNG' : '/assets/HintBird.PNG'" />
+<br>
 @if (isFood1Visible)
 {
 <img id="food1" cdkDrag src="/assets/WildFood.PNG" title="First Letter" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
@@ -17,6 +18,7 @@
 @else
 {
     <span>{{hint1}}</span>
+    <br>
 }
 @if (isFood2Visible)
 {
@@ -24,7 +26,8 @@
 }
 @else
 {
-    <span>{{hint2}} + "\r\n"</span>
+    <span>{{hint2}}</span>
+    <br>
 }
 @if (isFood3Visible)
 {

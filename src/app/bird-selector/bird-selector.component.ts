@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './bird-selector.component.html',
-  styleUrl: './bird-selector.component.scss',
+  styleUrl: './bird-selector.component.css',
 })
 export class BirdSelectorComponent {
   searchString: string = "";

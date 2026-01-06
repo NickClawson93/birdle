@@ -9,7 +9,7 @@ import { Hints } from "./hints/hints";
   standalone: true,
   imports: [RouterOutlet, BirdSelectorComponent, GuessesComponent, Hints],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'birdle';

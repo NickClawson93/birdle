@@ -10,7 +10,7 @@ import { WinLosePopupComponent } from '../win-lose-popup/win-lose-popup.componen
   standalone: true,
   imports: [WinLosePopupComponent],
   templateUrl: './guesses.component.html',
-  styleUrl: './guesses.component.scss'
+  styleUrl: './guesses.component.css'
 })
 export class GuessesComponent {
   

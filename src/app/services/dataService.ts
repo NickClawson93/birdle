@@ -20,7 +20,7 @@ export class DataService
         this.birdData = jsonData.map((jsonBird: any) =>
             ({
                 id: idCounter++,
-                name: jsonBird['Common name'],
+                name: jsonBird['Common name'].toString().trim(),
                 wingspan: typeof(jsonBird['Wingspan']) == "number" ? jsonBird['Wingspan'] : 0,
                 expansion: jsonBird['Expansion'],
                 powerColor: jsonBird['Color'],

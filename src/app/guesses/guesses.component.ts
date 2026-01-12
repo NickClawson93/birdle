@@ -20,6 +20,7 @@ export class GuessesComponent {
   guesses: Bird[] = [];
   isPopupVisible = false;
   popupMessage = '';
+  remainingGuesses: number = 6;
 
   ngOnInit() {
     this.guessService.GuessSubmittedEvent
@@ -39,6 +40,11 @@ export class GuessesComponent {
     if (birdToAdd === this.secretService.GetSecretBird())
     {
       this.checkWinLoseCondition(true);
+    }
+    this.remainingGuesses--;
+    if (this.remainingGuesses == 0 )//&& birdToAdd !== this.secretService.GetSecretBird())
+    {
+      this.checkWinLoseCondition(false);
     }
   }
 

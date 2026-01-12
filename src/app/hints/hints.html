@@ -9,31 +9,38 @@
         <img src="/assets/HintBird.PNG" />
     }
 </div> -->
-<img #hungryBird [src]="isHovering ? 'assets/HintBirdHungry.PNG' : 'assets/HintBird.PNG'" />
-<br>
-@if (isFood1Visible)
-{
-<img id="food1" cdkDrag src="assets/WildFood.PNG" title="First Letter" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
-}
-@else
-{
-    <span>{{hint1}}</span>
+<div class="flex flex-col justify-center items-center p-4">
+    <img #hungryBird [src]="isHovering ? 'assets/HintBirdHungry.PNG' : 'assets/HintBird.PNG'" />
     <br>
-}
-@if (isFood2Visible)
-{
-<img id="food2" cdkDrag src="assets/WildFood.PNG" title="Scientific Name" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
-}
-@else
-{
-    <span>{{hint2}}</span>
-    <br>
-}
-@if (isFood3Visible)
-{
-<img id="food3" cdkDrag src="assets/WildFood.PNG" title="Power Description" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
-}
-@else
-{
-    <span>{{hint3}}</span>
-}
+    <div>
+        @if (isFood1Visible)
+        {
+        <img id="food1" class=""
+        cdkDrag src="assets/WildFood.PNG" title="First Letter" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
+        }
+        @else
+        {
+            <span>{{hint1}}</span>
+            <br>
+        }
+        @if (isFood2Visible)
+        {
+        <img id="food2" 
+        cdkDrag src="assets/WildFood.PNG" title="Scientific Name" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
+        }
+        @else
+        {
+            <span>{{hint2}}</span>
+            <br>
+        }
+        @if (isFood3Visible)
+        {
+        <img id="food3" 
+        cdkDrag src="assets/WildFood.PNG" title="Power Description" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
+        }
+        @else
+        {
+            <span>{{hint3}}</span>
+        }
+    </div>
+</div>

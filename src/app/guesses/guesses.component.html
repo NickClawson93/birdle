@@ -1,115 +1,103 @@
-<img src="assets/Worm.PNG"/>
-<img src="assets/Wheat.PNG"/>
-<img src="assets/Berry.PNG"/>
-<img src="assets/RRRAT.PNG"/>
-<img src="assets/Fish.PNG"/>
-<!-- <div>{{secretService.GetSecretBird().name}}</div> -->
-<div [hidden] = "guesses.length == 0">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Wingspan</th>
-                <th>Expansion</th>
-                <th>Power Color</th>
-                <th>Power Category</th>
-                <th>Victory Points</th>
-                <th>Nest Type</th>
-                <th>Egg Capacity</th>
-                <th>Habitat(s)</th>
-                <th>Food Cost</th>
-                <th>Food in Cost</th>
-            </tr>
-        </thead>
-        <tbody>
-          @for (guess of guesses; track i; let i = $index)
-          {
-            <tr>
-              <td>{{guess.name}}</td> 
-              <td [style]="getWingspanCompare(guess.wingspan)">{{guess.wingspan == 0 ? "*" : guess.wingspan}}</td>
-              <td [style]="getExpansionCompare(guess.expansion)">
-                {{(guess.expansion == 'originalcore' || guess.expansion == 'swiftstart') ? 'Base Game' : guess.expansion == 'european' ? 'European' : 'Oceania'}}
-              </td>
-              <td [style]="getPowerColorCompare(guess.powerColor)">{{guess.powerColor}}</td>
-              <td [style]="getPowerCategoryCompare(guess.powerCategory)">{{guess.powerCategory}}</td>
-              <td [style]="getVictoryPointsCompare(guess.victoryPoints)">{{guess.victoryPoints}}</td>
-              <td [style]="getNestTypeCompare(guess.nestType)">
-                <!-- {{guess.nestType}} -->
-                @if (guess.nestType == "Cavity")
-                {
-                  <img src="assets/Cavity.PNG"/>
-                }
-                @if (guess.nestType == "Bowl")
-                {
-                  <img src="assets/Bowl.PNG"/>
-                }
-                @if (guess.nestType == "Platform")
-                {
-                  <img src="assets/Platform.PNG"/>
-                }
-                @if (guess.nestType == "Ground")
-                {
-                  <img src="assets/Ground.PNG"/>
-                }
-                @if (guess.nestType == "Wild")
-                {
-                  <img src="assets/WildNest.PNG"/>
-                }
-                </td>
-              <td [style]="getEggCapacityCompare(guess.eggCapacity)">{{guess.eggCapacity}}</td>
-              <td [style]="getHabitatsCompare(guess.habitats)">
-                
-                  
-                  <!-- {{guess.habitats.toString()}} -->
-                  @if (guess.habitats.includes(habitat.Forest))
-                  {
-                    <img src="assets/Forest.PNG"/>
-                  }
-                  @if (guess.habitats.includes(habitat.Grassland))
-                  {
-                    <img src="assets/Grassland.PNG"/>
-                  }
-                  @if (guess.habitats.includes(habitat.Wetland))
-                  {
-                    <img src="assets/Wetland.PNG"/>
-                  }
-                </td>
-              <td [style]="getFoodCostCompare(guess.foodCost)">{{guess.foodCost}}</td>
-              <td [style]="getFoodsInCostCompare(guess.foodsInCost)">
-                <!-- {{guess.foodsInCost.toString()}} -->
-                @if (guess.foodsInCost.includes(food.Worm))
-                {
-                  <img src="assets/Worm.PNG"/>
-                }
-                @if (guess.foodsInCost.includes(food.Wheat))
-                {
-                  <img src="assets/Wheat.PNG"/>
-                }
-                @if (guess.foodsInCost.includes(food.Berry))
-                {
-                  <img src="assets/Berry.PNG"/>
-                }
-                @if (guess.foodsInCost.includes(food.Rat))
-                {
-                  <img src="assets/RRRAT.PNG"/>
-                }
-                @if (guess.foodsInCost.includes(food.Fish))
-                {
-                  <img src="assets/Fish.PNG"/>
-                }
-                @if (guess.foodsInCost.includes(food.Wild))
-                {
-                  <img src="assets/WildFood.PNG"/>
-                }
-                @if (guess.foodsInCost.includes(food.Nectar))
-                {
-                  <img src="assets/Nicktar.PNG"/>
-                }
-              </td>
-            </tr>
-          }
-        </tbody>
+<div class="flex justify-center px-2">
+  @for (index of [].constructor(6); track index) {
+    @if ($index < remainingGuesses) {
+      <img src="assets/FullFeather.png" class="feather"/>
+    }
+    @else {
+      <img src="assets/EmptyFeather.png" class="feather"/>
+    }
+  }
+</div>
+<div [hidden]="guesses.length == 0" class="flex justify-center p-4">
+  <div class="w-full max-w-6xl overflow-x-auto">
+    <table class="w-full bg-white shadow-lg rounded-lg overflow-hidden table-auto">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left font-semibold">Name</th>
+          <th class="px-4 py-2 text-left font-semibold">Wingspan</th>
+          <th class="px-4 py-2 text-left font-semibold">Expansion</th>
+          <th class="px-4 py-2 text-left font-semibold">Power Color</th>
+          <th class="px-4 py-2 text-left font-semibold">Power Category</th>
+          <th class="px-4 py-2 text-left font-semibold">Victory Points</th>
+          <th class="px-4 py-2 text-left font-semibold">Nest Type</th>
+          <th class="px-4 py-2 text-left font-semibold">Egg Capacity</th>
+          <th class="px-4 py-2 text-left font-semibold">Habitat(s)</th>
+          <th class="px-4 py-2 text-left font-semibold">Food Cost</th>
+          <th class="px-4 py-2 text-left font-semibold">Food in Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (guess of guesses; track i; let i = $index) {
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 border-b border-gray-200">{{guess.name}}</td>
+            <td class="px-4 py-2 border-b border-gray-200" [style]="getWingspanCompare(guess.wingspan)">{{guess.wingspan == 0 ? "*" : guess.wingspan}}</td>
+            <td class="px-4 py-2 border-b border-gray-200" [style]="getExpansionCompare(guess.expansion)">
+              {{(guess.expansion == 'originalcore' || guess.expansion == 'swiftstart') ? 'Base Game' : guess.expansion == 'european' ? 'European' : 'Oceania'}}
+            </td>
+            <td class="px-4 py-2 border-b border-gray-200" [style]="getPowerColorCompare(guess.powerColor)">{{guess.powerColor}}</td>
+            <td class="px-4 py-2 border-b border-gray-200" [style]="getPowerCategoryCompare(guess.powerCategory)">{{guess.powerCategory}}</td>
+            <td class="px-4 py-2 border-b border-gray-200" [style]="getVictoryPointsCompare(guess.victoryPoints)">{{guess.victoryPoints}}</td>
+            <td class="px-4 py-2 border-b border-gray-200 text-center" [style]="getNestTypeCompare(guess.nestType)">
+              <!-- {{guess.nestType}} -->
+              @if (guess.nestType == "Cavity") {
+                <img src="assets/Cavity.PNG" class="inline-block"/>
+              }
+              @if (guess.nestType == "Bowl") {
+                <img src="assets/Bowl.PNG" class="inline-block"/>
+              }
+              @if (guess.nestType == "Platform") {
+                <img src="assets/Platform.PNG" class="inline-block"/>
+              }
+              @if (guess.nestType == "Ground") {
+                <img src="assets/Ground.PNG" class="inline-block"/>
+              }
+              @if (guess.nestType == "Wild") {
+                <img src="assets/WildNest.PNG" class="inline-block"/>
+              }
+            </td>
+            <td class="px-4 py-2 border-b border-gray-200" [style]="getEggCapacityCompare(guess.eggCapacity)">{{guess.eggCapacity}}</td>
+            <td class="px-4 py-2 border-b border-gray-200 text-center" [style]="getHabitatsCompare(guess.habitats)">
+              <!-- {{guess.habitats.toString()}} -->
+              @if (guess.habitats.includes(habitat.Forest)) {
+                <img src="assets/Forest.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.habitats.includes(habitat.Grassland)) {
+                <img src="assets/Grassland.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.habitats.includes(habitat.Wetland)) {
+                <img src="assets/Wetland.PNG" class="inline-block mx-1"/>
+              }
+            </td>
+            <td class="px-4 py-2 border-b border-gray-200" [style]="getFoodCostCompare(guess.foodCost)">{{guess.foodCost}}</td>
+            <td class="px-4 py-2 border-b border-gray-200 text-center" [style]="getFoodsInCostCompare(guess.foodsInCost)">
+              <!-- {{guess.foodsInCost.toString()}} -->
+              @if (guess.foodsInCost.includes(food.Worm)) {
+                <img src="assets/Worm.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.foodsInCost.includes(food.Wheat)) {
+                <img src="assets/Wheat.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.foodsInCost.includes(food.Berry)) {
+                <img src="assets/Berry.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.foodsInCost.includes(food.Rat)) {
+                <img src="assets/RRRAT.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.foodsInCost.includes(food.Fish)) {
+                <img src="assets/Fish.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.foodsInCost.includes(food.Wild)) {
+                <img src="assets/WildFood.PNG" class="inline-block mx-1"/>
+              }
+              @if (guess.foodsInCost.includes(food.Nectar)) {
+                <img src="assets/Nicktar.PNG" class="inline-block mx-1"/>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
     </table>
+  </div>
 </div>
 
 <app-win-lose-popup [isVisible]="isPopupVisible" [message]="popupMessage" (reset)="handleReset()"></app-win-lose-popup>

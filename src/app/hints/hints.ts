@@ -48,9 +48,9 @@ export class Hints {
 
 
   dragFoodEnd(event: CdkDragEnd) {
+    let foodId = event.source.element.nativeElement.getAttribute("id");
     if (this.isHovering) {
       console.log("feeding bird");
-      let foodId = event.source.element.nativeElement.getAttribute("id");
       if (foodId === "food1") {
         this.isFood1Visible = false;
       }
@@ -60,6 +60,9 @@ export class Hints {
       else if (foodId === "food3") {
         this.isFood3Visible = false;
       }
+    }
+    else {
+      event.source.reset();
     }
     console.log("dragging ended");
     this.isHovering = false;

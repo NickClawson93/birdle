@@ -1,46 +1,39 @@
-<!-- 
-<div>
-    @if(isHovering && isDragging)
-    {
-        <img src="/assets/HintBirdHungry.PNG" />
-    }
-    @else
-    {
-        <img src="/assets/HintBird.PNG" />
-    }
-</div> -->
-<div class="flex flex-col justify-center items-center p-4">
+<div class="flex flex-row justify-center items-center p-4">
     <img #hungryBird [src]="isHovering ? 'assets/HintBirdHungry.PNG' : 'assets/HintBird.PNG'" />
     <br>
     <div>
         @if (isFood1Visible)
         {
-        <img id="food1" class=""
-        cdkDrag src="assets/WildFood.PNG" title="First Letter" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
+        <img id="food1" class="food"
+        cdkDrag src="assets/Worm.PNG" title="First Letter" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
         }
         @else
         {
-            <span>{{hint1}}</span>
-            <br>
+            <div class="hint-container">
+                <span class="hint-span">{{hint1}}</span>
+            </div>
         }
         @if (isFood2Visible)
         {
-        <img id="food2" 
-        cdkDrag src="assets/WildFood.PNG" title="Scientific Name" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
+        <img id="food2" class="food"
+        cdkDrag src="assets/Worm.PNG" title="Scientific Name" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
         }
         @else
         {
-            <span>{{hint2}}</span>
-            <br>
+            <div class="hint-container">
+                <span class="hint-span">{{hint2}}</span>
+            </div>
         }
         @if (isFood3Visible)
         {
-        <img id="food3" 
-        cdkDrag src="assets/WildFood.PNG" title="Power Description" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
+        <img id="food3" class="food"
+        cdkDrag src="assets/Worm.PNG" title="Power Description" (cdkDragMoved)="dragFoodStart($event)" (cdkDragEnded)="dragFoodEnd($event)"/>
         }
         @else
         {
-            <span>{{hint3}}</span>
+            <div class="hint-container">
+                <span class="hint-span">{{hint3}}</span>
+            </div>
         }
     </div>
 </div>

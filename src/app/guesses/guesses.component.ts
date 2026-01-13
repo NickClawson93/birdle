@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { GuessService } from '../services/guessService'
 import { Bird, Expansion, Food, Habitat } from '../bird';
 import { SecretService } from '../services/secretService';
 import { DataService } from '../services/dataService';
 import { WinLosePopupComponent } from '../win-lose-popup/win-lose-popup.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-guesses',
@@ -17,6 +18,7 @@ export class GuessesComponent {
   guessService = inject(GuessService);
   secretService = inject(SecretService);
   dataService = inject(DataService);
+  cookieService = inject(CookieService);
   guesses: Bird[] = [];
   isPopupVisible = false;
   popupMessage = '';
@@ -28,10 +30,16 @@ export class GuessesComponent {
       console.log('Event message from Component A: ' + data);
       this.addGuess(data);
     });
+
+    this.guessService.ResetEvent
+    .subscribe(() => {
+      this.handleReset();
+    });
   }
 
   public addGuess(guess: number): void
   {
+    this.remainingGuesses--;
     const birdToAdd = this.dataService.GetBirds()[guess];
     if (birdToAdd !== undefined)
     {
@@ -39,11 +47,12 @@ export class GuessesComponent {
     }
     if (birdToAdd === this.secretService.GetSecretBird())
     {
+      this.cookieService.set('hasPlayedToday', 'true', { expires: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1, 0, 0, 0) }); // Next midnight
       this.checkWinLoseCondition(true);
     }
-    this.remainingGuesses--;
-    if (this.remainingGuesses == 0 )//&& birdToAdd !== this.secretService.GetSecretBird())
+    if (this.remainingGuesses == 0 && birdToAdd !== this.secretService.GetSecretBird())
     {
+      this.cookieService.set('hasPlayedToday', 'true', { expires: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1, 0, 0, 0) }); // Next midnight
       this.checkWinLoseCondition(false);
     }
   }
@@ -250,7 +259,8 @@ export class GuessesComponent {
 
   handleReset() {
     this.isPopupVisible = false;
-    // Reset game logic here
+    this.guesses = [];
+    this.remainingGuesses = 6;
   }
 }
 

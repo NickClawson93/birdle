@@ -1,5 +1,5 @@
 <div class="flex justify-center px-2">
-  @for (index of [].constructor(6); track index) {
+  @for (index of [].constructor(6); track $index) {
     @if ($index < remainingGuesses) {
       <img src="assets/FullFeather.png" class="feather"/>
     }
@@ -100,4 +100,4 @@
   </div>
 </div>
 
-<app-win-lose-popup [isVisible]="isPopupVisible" [message]="popupMessage" (reset)="handleReset()"></app-win-lose-popup>
+<app-win-lose-popup [isVisible]="isPopupVisible" [message]="popupMessage"></app-win-lose-popup>

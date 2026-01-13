@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, ElementRef, inject } from '@angular/core';
 import { CdkDrag, CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
 import { SecretService } from '../services/secretService';
+import { GuessService } from '../services/guessService';
 
 @Component({
   selector: 'app-hints',
@@ -10,6 +11,7 @@ import { SecretService } from '../services/secretService';
 })
 export class Hints {
   secretService = inject(SecretService);
+  guessService = inject(GuessService);
 
   hint1: string = "The first letter of the bird is: " + this.secretService.GetSecretBird().name.charAt(0);
   hint2: string = "The scientific name of the bird is: " + this.secretService.GetSecretBird().scientificName;
@@ -22,6 +24,13 @@ export class Hints {
   isFood1Visible: boolean = true;
   isFood2Visible: boolean = true;
   isFood3Visible: boolean = true;
+
+  ngOnInit() {
+    this.guessService.ResetEvent
+    .subscribe(() => {
+      this.handleReset();
+    });
+  }
 
   mouseEnter() {
     console.log("hovering started");
@@ -66,5 +75,11 @@ export class Hints {
     }
     console.log("dragging ended");
     this.isHovering = false;
+  }
+
+  public handleReset() {
+    this.isFood1Visible = true;
+    this.isFood2Visible = true;
+    this.isFood3Visible = true;
   }
 }

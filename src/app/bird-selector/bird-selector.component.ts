@@ -4,6 +4,7 @@ import { GuessService } from '../services/guessService';
 import { Bird } from '../bird';
 import { DataService } from '../services/dataService';
 import { FormsModule } from '@angular/forms';
+import { SecretService } from '../services/secretService';
 
 @Component({
   selector: 'app-bird-selector',
@@ -16,9 +17,18 @@ export class BirdSelectorComponent {
   searchString: string = "";
   guessService = inject(GuessService);
   dataService = inject(DataService)
+  secretService = inject(SecretService);
   birdList: Bird[] = this.dataService.GetBirds();
   filteredList: Bird[] = [];
   selectedBird: Bird | null = null;
+
+  ngOnInit() {
+    this.guessService.ResetEvent
+    .subscribe((data: number) => {
+      console.log('Event message from Component A: ' + data);
+      this.handleReset();
+    });
+  }
 
   constructor(private elementRef: ElementRef)
   {
@@ -53,6 +63,7 @@ export class BirdSelectorComponent {
     }
     this.guessService.SubmitGuess(this.selectedBird.id);
     this.selectedBird = null;
+    this.searchString = "";
   }
 
   public onFocusLost(event: FocusEvent)
@@ -68,5 +79,11 @@ export class BirdSelectorComponent {
     {
       this.filteredList = [];
     }
+  }
+
+  public handleReset()
+  {
+    this.selectedBird = null;
+    this.searchString = "";
   }
 }

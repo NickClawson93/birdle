@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Bird, Food, Habitat } from '../bird';
 import { RealBirds } from '../birds';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -8,6 +11,8 @@ import { RealBirds } from '../birds';
 export class DataService
 {
     birdData: Bird[] = [];
+
+    constructor(private http: HttpClient) {}
 
     GetBirds(): Bird[] 
     {
@@ -92,4 +97,20 @@ export class DataService
 
         return foods;
     }
+
+getBirdFunFact(birdName: string): Observable<any> {
+    const apiKey = "";//environment.openAiKey;  // Assuming you have this in environment.ts
+    const url = 'https://api.openai.com/v1/responses';  // Corrected endpoint (no query param for key)
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`  // Bearer token in headers, not URL
+    });
+    const body = {
+        model: 'gpt-4o-mini',  // Corrected model (gpt-5-nano isn't real; use gpt-4o-mini or similar)
+        input: `Give me one interesting fun fact about the ${birdName} bird. Keep it short and engaging.`,  // Adapted prompt
+        store: true
+    };
+    return this.http.post(url, body, { headers });
+}
+
 }

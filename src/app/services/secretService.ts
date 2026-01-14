@@ -14,7 +14,7 @@ export class SecretService {
     isPlayingBirdOfTheDay: boolean = true;
 
     constructor() {
-        this.isPlayingBirdOfTheDay = this.cookieService.get('hasPlayedToday') === 'false';
+        this.isPlayingBirdOfTheDay = (this.cookieService.get('hasPlayedToday') === 'false' || this.cookieService.get('hasPlayedToday') === '');
     }
     public GetSecretBird(): Bird
     {

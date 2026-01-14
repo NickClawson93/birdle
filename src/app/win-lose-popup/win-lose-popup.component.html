@@ -1,7 +1,7 @@
 @if (isVisible)
 {
   <div class="popup">
-    <h2>{{message}}</h2>
+    <p style="white-space: pre-line;">{{message}}</p>
     <p>The secret bird was: {{secretService.GetSecretBird().name}}</p>
     <button (click)="onReset()">Reset</button>
   </div>

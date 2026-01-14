@@ -5,6 +5,7 @@ import { SecretService } from '../services/secretService';
 import { DataService } from '../services/dataService';
 import { WinLosePopupComponent } from '../win-lose-popup/win-lose-popup.component';
 import { CookieService } from 'ngx-cookie-service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-guesses',
@@ -247,7 +248,7 @@ export class GuessesComponent {
     return Habitat; 
   }
 
-  checkWinLoseCondition(didWin: boolean) {
+  async checkWinLoseCondition(didWin: boolean) {
     if (didWin) {
       this.popupMessage = 'You Win!';
       this.isPopupVisible = true;
@@ -255,6 +256,17 @@ export class GuessesComponent {
       this.popupMessage = 'You Lose!';
       this.isPopupVisible = true;
     }
+
+    // // TODO - this should be in the winlose component
+    // try {
+    //   const secretBird = this.secretService.GetSecretBird();
+    //   const response = await firstValueFrom(this.dataService.getBirdFunFact(secretBird.name));
+    //   const funFact = response.output[0].content[0].text;
+    //   this.popupMessage += `\n\nFun Fact: ${funFact}`;
+    // } catch (error) {
+    //   console.error('Error fetching fun fact:', error);
+    //   this.popupMessage += '\n\nFun Fact: Could not load fun fact.';
+    // }
   }
 
   handleReset() {
